@@ -11,7 +11,9 @@ public class Chronometer {
   	int lastHour;
   	int lastMin;
   	int lastSec;
-  	int 
+  	int difHour;
+        int difMin;
+        int difSec;
   	Date today = new Date();
   
   
@@ -21,14 +23,25 @@ public class Chronometer {
       startMin = today.getMinutes();
       startSec = today.getSeconds();
       
-      lastHour = today.getHours();
-      lastMin = today.getMinutes();
-      lastSec = today.getSeconds();
+      lastHour = startHour;
+      lastMin = startMin;
+      lastSec = startSec;
       
     }
   
-  	public int getIntermediate(){
-      
+    public int getIntermediate(){
+      interHour = today.getHours();
+      interMin = today.getMinutes();
+      interSec = today.getSeconds();
+
+      difHour = interHour - lastHour;
+      lastHour = interHour;
+
+      difMin = interMin - lastMin;
+      lastMin = interMin;
+
+      difSec = interSec - lastSec;
+      lastSec = interSec;
     }
   
   	public int stop(){

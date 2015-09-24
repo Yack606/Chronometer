@@ -1,4 +1,6 @@
 import java.util.Date;
+import java.io.*;
+import java.util.Scanner;
 
 public class Chronometer {
   	
@@ -91,6 +93,7 @@ public class Chronometer {
     		System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
     		
     		pausePresent = false;
+        }
     		
     	else{
     		System.out.println("Isjunkite PAUSE");
@@ -176,24 +179,24 @@ public class Main {
 		
 		word = in.nextLine();
 		
-		while (start){
+		while(start){
 			if (word.equals("S")) {
 				start = false;
 				laikas.start();
-				while (laikas.GO()){
+				while(laikas.GO()){
 					System.out.println("Irasykite:");
 					System.out.println("            I - Skaiciuoti intervala nestabdant laiko.");
 					System.out.println("            P - Ijungti/Isjungti pauze");
 					System.out.println("            T - Sustabdyti laiko skaiciavima");
 					word2 = in.nextLine();
-					switch (word2) {
+					switch(word2) {
 						case "I": laikas.getIntermediate();
 							break;
 						case "P": laikas.pause();
 							break;
 						case "T": laikas.stop();
-							break:
-						default: System.out.println("Netinkamas pasirinkimas.")
+							break;
+						default: System.out.println("Netinkamas pasirinkimas.");
 							break;
 					}
 				

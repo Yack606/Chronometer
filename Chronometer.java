@@ -161,8 +161,11 @@ public class Main {
 	
 
 	public static void main(String args[]) {
+		Chronometer laikas = new Chronometer();
 		String word;
+		String word2;
 		boolean start = true;
+		
 		
 		Scanner in = new Scanner(System.in);
 		System.out.println("Irasykite:");
@@ -176,11 +179,29 @@ public class Main {
 		while start{
 			if word.equals("S"){
 				start = false;
-				
-				while  Chronometer.GO(){
+				laikas.start();
+				while  laikas.GO(){
+					System.out.println("Irasykite:");
+					System.out.println("            I - Skaiciuoti intervala nestabdant laiko.");
+					System.out.println("            P - Ijungti/Isjungti pauze");
+					System.out.println("            T - Sustabdyti laiko skaiciavima");
+					word2 = in.nextLine();
+					switch (word2) {
+						case "I": laikas.getIntermediate();
+							break;
+						case "P": laikas.pause();
+							break;
+						case "T": laikas.stop();
+							break:
+						default: System.out.println("Netinkamas pasirinkimas.")
+							break;
+					}
 				
 			}
 				
+			}
+			else{
+				System.out.println("Norint pradeti, reikia spausti S");
 			}
 		}
 

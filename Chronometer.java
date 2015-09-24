@@ -58,7 +58,7 @@ public class Chronometer {
     	}
   
     public void getIntermediate(){
-    	if pause == false && pausePresent == false{
+    	if (pause == false && pausePresent == false) {
     		interHour = today.getHours();
     		interMin = today.getMinutes();
     		interSec = today.getSeconds();
@@ -74,7 +74,7 @@ public class Chronometer {
     		
     		System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
     	}
-    	else if pause == false && pausePresent == true{
+    	else if (pause == false && pausePresent == true) {
     		interHour = today.getHours();
     		interMin = today.getMinutes();
     		interSec = today.getSeconds();
@@ -100,7 +100,7 @@ public class Chronometer {
     }
     
     public void stop(){
-    	if pause == false {
+    	if (pause == false) {
     		lastHour = today.getHours();
     		difHour = lastHour - startHour - pauseHour;
     		
@@ -125,7 +125,7 @@ public class Chronometer {
     
     public int pause(){
     	
-    	if pause {
+    	if (pause) {
     		pauseStopHour = today.getHours();
     		pauseStopMin = today.getMinutes();
     		pauseStopSec = today.getSeconds();
@@ -177,7 +177,7 @@ public class Main {
 		word = in.nextLine();
 		
 		while start{
-			if word.equals("S"){
+			if (word.equals("S")) {
 				start = false;
 				laikas.start();
 				while  laikas.GO(){

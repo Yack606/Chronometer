@@ -176,11 +176,11 @@ public class Main {
 		
 		word = in.nextLine();
 		
-		while start{
+		while (start){
 			if (word.equals("S")) {
 				start = false;
 				laikas.start();
-				while  laikas.GO(){
+				while (laikas.GO()){
 					System.out.println("Irasykite:");
 					System.out.println("            I - Skaiciuoti intervala nestabdant laiko.");
 					System.out.println("            P - Ijungti/Isjungti pauze");

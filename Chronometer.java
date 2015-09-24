@@ -18,10 +18,33 @@ public class Chronometer {
         int difMin;
         int difSec;
         
+        int pauseStartHour;
+        int pauseStartMin;
+        int pauseStartSec;
+        
+        int pauseStopHour;
+        int pauseStopMin;
+        int pauseStopSec;
+        
+        int pauseDifHour;
+        int pauseDifMin;
+        int pauseDifSec;
+        
+        int pauseHour;
+        int pauseMin;
+        int pauseSec;
+        
+        boolean pause = false;
+        boolean pausePresent = false;
+        boolean MethodGO = true;
+        
+        
   	Date today = new Date();
   
   
-    
+    public boolean GO(){
+    	return MethodGO;
+    }
     public void start(){
     	startHour = today.getHours();
     	startMin = today.getMinutes();
@@ -35,36 +58,99 @@ public class Chronometer {
     	}
   
     public void getIntermediate(){
-    	interHour = today.getHours();
-    	interMin = today.getMinutes();
-    	interSec = today.getSeconds();
-    	
-    	difHour = interHour - lastHour;
-    	lastHour = interHour;
-    	
-    	difMin = interMin - lastMin;
-    	lastMin = interMin;
-    	
-    	difSec = interSec - lastSec;
-    	lastSec = interSec;
-    	
-    	System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
+    	if pause == false && pausePresent == false{
+    		interHour = today.getHours();
+    		interMin = today.getMinutes();
+    		interSec = today.getSeconds();
+    		
+    		difHour = interHour - lastHour;
+    		lastHour = interHour;
+    		
+    		difMin = interMin - lastMin;
+    		lastMin = interMin;
+    		
+    		difSec = interSec - lastSec;
+    		lastSec = interSec;
+    		
+    		System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
+    	}
+    	else if pause == false && pausePresent == true{
+    		interHour = today.getHours();
+    		interMin = today.getMinutes();
+    		interSec = today.getSeconds();
+    		
+    		difHour = interHour - lastHour - pauseHour;
+    		lastHour = interHour;
+    		
+    		difMin = interMin - lastMin - pauseMin;
+    		lastMin = interMin;
+    		
+    		difSec = interSec - lastSec - pauseSec;
+    		lastSec = interSec;
+    		
+    		System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
+    		
+    		pausePresent = false;
+    		
+    	else{
+    		System.out.println("Isjunkite PAUSE");
+    	}
+    }
       
     }
     
-    public int stop(){
-    	lastHour = today.getHours();
-    	difHour = lastHour - startHour;
+    public void stop(){
+    	if pause == false {
+    		lastHour = today.getHours();
+    		difHour = lastHour - startHour - pauseHour;
+    		
+    		lastMin = today.getMinutes();   	
+    		difMin = lastMin - startMin - pauseMin;
+    		
+    		lastSec = today.getSeconds();   	
+    		difSec = lastSec - startSec - pauseSec;
+    		
+    		System.out.println("Galutinio intervalo trukme : "+difHour+":"+difMin+":"+difSec);
+    		System.out.println("Laikas buvo sustabdytas : "+pauseHour+":"+pauseMin+":"+pauseSec);
+    		
+    		MethodGO = false;
+    	}
+    	else{
+    		System.out.println("Isjunkite PAUSE");
+    	}
     	
-    	lastMin = today.getMinutes();   	
-    	difMin = lastMin - startMin;
-
     	
-    	lastSec = today.getSeconds();   	
-    	difSec = lastSec - startSec;
+    	
     }
     
     public int pause(){
+    	
+    	if pause {
+    		pauseStopHour = today.getHours();
+    		pauseStopMin = today.getMinutes();
+    		pauseStopSec = today.getSeconds();
+    		
+    		pauseDifHour = pauseStopHour - pauseStartHour;
+    		pauseDifMin = pauseStopMin - pauseStartMin;
+    		pauseDifSec = pauseStopSec - pauseStartSec;
+    		
+    		pauseHour = pauseHour + pauseDifHour;
+    		pauseMin = pauseMin + pauseDifMin;
+    		pauseSec = pauseSec + pauseDifSec;
+        
+    		pause = false;	
+    	}
+    	
+    	else {
+    		pauseStartHour = today.getHours();
+    		pauseStartMin = pauseStopMin;
+    		pauseStartSec = pauseStopSec;
+    		
+    		
+    		pause = true;	
+    	}
+    	
+
     	
     }
 
@@ -75,6 +161,28 @@ public class Main {
 	
 
 	public static void main(String args[]) {
+		String word;
+		boolean start = true;
+		
+		Scanner in = new Scanner(System.in);
+		System.out.println("Irasykite:");
+		System.out.println("            S - Pradeti skaiciavima.");
+		System.out.println("            I - Skaiciuoti intervala nestabdant laiko.");
+		System.out.println("            P - Ijungti/Isjungti pauze");
+		System.out.println("            T - Sustabdyti laiko skaiciavima");
+		
+		word = in.nextLine();
+		
+		while start{
+			if word.equals("S"){
+				start = false;
+				
+				while  Chronometer.GO(){
+				
+			}
+				
+			}
+		}
 
         
     }

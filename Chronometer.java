@@ -1,69 +1,67 @@
-import java.util.Date;
+import java.util.Calendar;
 import java.io.*;
 import java.util.Scanner;
 
 public class Chronometer {
-  	
-  	int startHour;
-  	int startMin;
-  	int startSec;
-  	
-  	int interHour;
-  	int interMin;
-  	int interSec;
-  	
-  	int lastHour;
-  	int lastMin;
-  	int lastSec;
-  	
-  	int difHour;
-        int difMin;
-        int difSec;
-        
-        int pauseStartHour;
-        int pauseStartMin;
-        int pauseStartSec;
-        
-        int pauseStopHour;
-        int pauseStopMin;
-        int pauseStopSec;
-        
-        int pauseDifHour;
-        int pauseDifMin;
-        int pauseDifSec;
-        
-        int pauseHour;
-        int pauseMin;
-        int pauseSec;
-        
-        boolean pause = false;
-        boolean pausePresent = false;
-        boolean MethodGO = true;
-        
-        
-  	Date today = new Date();
+  int startHour;
+  int startMin;
+  int startSec;
   
+  int interHour;
+  int interMin;
+  int interSec;
   
-    public boolean GO(){
-    	return MethodGO;
-    }
-    public void start(){
-    	startHour = today.getHours();
-    	startMin = today.getMinutes();
-    	startSec = today.getSeconds();
+  int lastHour;
+  int lastMin;
+  int lastSec;
+  
+  int difHour;
+  int difMin;
+  int difSec;
+  
+  int pauseStartHour;
+  int pauseStartMin;
+  int pauseStartSec;
+  
+  int pauseStopHour;
+  int pauseStopMin;
+  int pauseStopSec;
+  
+  int pauseDifHour;
+  int pauseDifMin;
+  int pauseDifSec;
+  
+  int pauseHour;
+  int pauseMin;
+  int pauseSec;
+  
+  boolean pause = false;
+  boolean pausePresent = false;
+  boolean MethodGO = true;
+  
+  Calendar cal = Calendar.getInstance();
+  
+  public boolean GO(){
+  	return MethodGO;
+  }
+  public void start(){
+  	startHour = cal.get(Calendar.HOUR_OF_DAY);
+    	startMin = cal.get(Calendar.MINUTE);
+    	startSec = cal.get(Calendar.SECOND);
     	
     	lastHour = startHour;
     	lastMin = startMin;
     	lastSec = startSec;
     	
     	System.out.println("Laikas pradetas skaiciuoti: "+startHour+":"+startMin+":"+startSec);
-    	}
+  	
+  }
   
     public void getIntermediate(){
     	if (pause == false && pausePresent == false) {
-    		interHour = today.getHours();
-    		interMin = today.getMinutes();
-    		interSec = today.getSeconds();
+    		interHour = cal.get(Calendar.HOUR_OF_DAY);
+    		interMin = cal.get(Calendar.MINUTE);
+    		interSec = cal.get(Calendar.SECOND);
     		
     		difHour = interHour - lastHour;
     		lastHour = interHour;
@@ -77,9 +75,9 @@ public class Chronometer {
     		System.out.println("Intervalo trukme : "+difHour+":"+difMin+":"+difSec);
     	}
     	else if (pause == false && pausePresent == true) {
-    		interHour = today.getHours();
-    		interMin = today.getMinutes();
-    		interSec = today.getSeconds();
+    		interHour = cal.get(Calendar.HOUR_OF_DAY);
+    		interMin = cal.get(Calendar.MINUTE);
+    		interSec = cal.get(Calendar.SECOND);
     		
     		difHour = interHour - lastHour - pauseHour;
     		lastHour = interHour;
@@ -99,18 +97,16 @@ public class Chronometer {
     		System.out.println("Isjunkite PAUSE");
     	}
     }
-      
-    }
     
     public void stop(){
     	if (pause == false) {
-    		lastHour = today.getHours();
+    		lastHour = cal.get(Calendar.HOUR_OF_DAY);
     		difHour = lastHour - startHour - pauseHour;
     		
-    		lastMin = today.getMinutes();   	
+    		lastMin = cal.get(Calendar.MINUTE);  	
     		difMin = lastMin - startMin - pauseMin;
     		
-    		lastSec = today.getSeconds();   	
+    		lastSec = cal.get(Calendar.SECOND);   	
     		difSec = lastSec - startSec - pauseSec;
     		
     		System.out.println("Galutinio intervalo trukme : "+difHour+":"+difMin+":"+difSec);
@@ -126,12 +122,12 @@ public class Chronometer {
     	
     }
     
-    public int pause(){
+    public void pause(){
     	
     	if (pause) {
-    		pauseStopHour = today.getHours();
-    		pauseStopMin = today.getMinutes();
-    		pauseStopSec = today.getSeconds();
+    		pauseStopHour = cal.get(Calendar.HOUR_OF_DAY);
+    		pauseStopMin = cal.get(Calendar.MINUTE);
+    		pauseStopSec = cal.get(Calendar.SECOND);
     		
     		pauseDifHour = pauseStopHour - pauseStartHour;
     		pauseDifMin = pauseStopMin - pauseStartMin;
@@ -145,18 +141,14 @@ public class Chronometer {
     	}
     	
     	else {
-    		pauseStartHour = today.getHours();
+    		pauseStartHour = pauseStopHour;
     		pauseStartMin = pauseStopMin;
     		pauseStartSec = pauseStopSec;
     		
     		
     		pause = true;	
     	}
-    	
-
-    	
     }
-
 }
 
 
@@ -164,6 +156,7 @@ public class Main {
 	
 
 	public static void main(String args[]) {
+		Calendar cal = Calendar.getInstance();
 		Chronometer laikas = new Chronometer();
 		String word;
 		String word2;
